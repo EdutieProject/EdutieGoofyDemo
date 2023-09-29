@@ -7,21 +7,23 @@ namespace Domain.Entities.Aggregates;
 public class LearningAction
 {
     private StudentUser user;
-    LearningElement learningElement;
-    private int experience = 0;
+    public StudentUser User { get => user; }
 
+    private readonly LearningElement learningElement;
+
+    private int experience = 0;
     public int Experience { get => experience; }
+
 
     public LearningAction(StudentUser user, LearningElement learningElement)
     {
-        User = user;
+        this.user = user;
         this.learningElement = learningElement;
     }
 
-    public StudentUser User { get => user; set => user = value; }
     public LearningElement LearningElement { get => learningElement; }
 
-    public void SimulateRandom()
+    public void Simulate()
     {
         experience = RandomNumberGenerator.GetInt32(200);
     }

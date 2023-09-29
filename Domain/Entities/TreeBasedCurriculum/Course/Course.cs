@@ -31,10 +31,20 @@ namespace Domain.Entities.TreeBasedCurriculum.Course
 
         public void DisplayCourse() => DisplayElement(0, Start);
 
+        public Course() 
+        {
+            Start = null!;
+        }
+
         public Course(CourseLearningElement start)
         {
             Start = start;
             AllLearningElements.Add(start);
+        }
+
+        public void StartWith(CourseLearningElement startElem)
+        {
+            Start = startElem;
         }
         public void AppendTo(CourseLearningElement elem, CourseLearningElement elemToAppend)
         {
@@ -44,13 +54,13 @@ namespace Domain.Entities.TreeBasedCurriculum.Course
 
         // get an apropraite lesson from this course according to user esp and elp
         // this function returns Starting elem even when course has been already finished
-        public CourseLearningElement? GetLessonFor(StudentUser user)
+        public CourseLearningElement GetLessonFor(StudentUser user)
         {
             var touchedCourseElems = user.Esp.GetAllTouchedFrom(this);
 
             var possibleLearningElems = AllLearningElements
                 .Where(o => !touchedCourseElems.Contains(o))
-                .Where(o => touchedCourseElems.Contains(o.Previous))
+                .Where(o => touchedCourseElems.Contains(o.Previous!))
                 .ToList();
             return possibleLearningElems.Count > 0 ? 
                 (CourseLearningElement) user.Elp.ChooseBestLearningElement(
