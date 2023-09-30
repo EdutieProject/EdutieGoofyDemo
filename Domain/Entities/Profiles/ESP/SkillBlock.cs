@@ -2,4 +2,4 @@
 
 namespace Domain.Entities.Profiles.ESP;
 
-public record SkillBlock(SkillTag Tag, int TotalExperience, DateTime CreatedOn);
+public record SkillBlock(Skill Skill, int TotalExperience, DateTime CreatedOn);

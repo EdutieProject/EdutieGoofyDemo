@@ -56,17 +56,7 @@ namespace Domain.Entities.TreeBasedCurriculum.Course
         // this function returns Starting elem even when course has been already finished
         public CourseLearningElement GetLessonFor(StudentUser user)
         {
-            var touchedCourseElems = user.Esp.GetAllTouchedFrom(this);
-
-            var possibleLearningElems = AllLearningElements
-                .Where(o => !touchedCourseElems.Contains(o))
-                .Where(o => touchedCourseElems.Contains(o.Previous!))
-                .ToList();
-            return possibleLearningElems.Count > 0 ? 
-                (CourseLearningElement) user.Elp.ChooseBestLearningElement(
-                    possibleLearningElems.ConvertAll(o=>(LearningElement)o)
-                    )
-                : Start;
+            throw new NotImplementedException();
         }
     }
 }

@@ -60,6 +60,6 @@ internal class Program
         }
         Console.WriteLine("\n------------\nESP display:\n-----------------\n");
 
-        user.Esp.DisplayBulk();
+        user.Elp.DisplayBulk();
     }
 }

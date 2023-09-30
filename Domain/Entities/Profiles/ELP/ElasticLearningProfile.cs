@@ -11,32 +11,50 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Profiles.ELP
 {
+    // ELP: a history of learning activities performed by users - it serves as a monitoring tool for user's performance
     public class ElasticLearningProfile : ILearningProfile
     {
-        // !!! If There was a change made to IntelligenceType Enum, old ELPs would not change! -- change how it works
-        Dictionary<IntelligenceType, int> Intelligence = Enum.GetValues(typeof(IntelligenceType))
-    .Cast<IntelligenceType>()
-    .ToDictionary(enumValue => enumValue, _ => 0);
+        private List<LearningBlock> learningBlocks = new();
 
-        private DateTime lastUpdate = DateTime.Now;
-        public DateTime LastUpadate { get => lastUpdate; set => lastUpdate = value; }
+        public DateTime LastUpadate { get; private set; }
 
         public void Adjust(LearningAction action)
         {
-            // TODO!
+            LearningBlock block = new(action.LearningElement, action.Experience, DateTime.Now);
+            learningBlocks.Add(block);
+            LastUpadate = DateTime.Now;
         }
 
-        public LearningElement ChooseBestLearningElement(List<LearningElement> learningElements)
+        public int GetTotalExperienceOf(LearningElement learningElement) 
         {
-            // TODO!
-            return learningElements.First();
+            int totalExperience = learningBlocks
+                .Where(o => o.LearningElement == learningElement)
+                .Sum(o => o.TotalExperience);
+            return totalExperience;
         }
 
-        public void Display()
+
+
+        // ============ Display functions =============
+
+        public void DisplayTotalExperienceOf(LearningElement element)
         {
-            foreach (var o in Intelligence)
+            Console.WriteLine($"Total experience gained in {element.Title}: {GetTotalExperienceOf(element)}");
+        }
+
+        public void DisplayAllBlocks()
+        {
+            foreach (var block in learningBlocks)
             {
-                Console.WriteLine($"{o.Key} intelligence: {o.Value}");
+                Console.WriteLine($"{block.LearningElement.Title} - experience: {block.TotalExperience}");
+            }
+        }
+
+        public void DisplayBulk()
+        {
+            foreach (var learningElem in learningBlocks.ConvertAll(o => o.LearningElement).Distinct())
+            {
+                Console.WriteLine($"Total experience in {learningElem.Title} : {GetTotalExperienceOf(learningElem)}");
             }
         }
     }

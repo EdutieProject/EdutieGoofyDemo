@@ -9,6 +9,6 @@ namespace Domain.Entities.Profiles.Interfaces;
 
 public interface ILearningProfile
 {
-    public DateTime LastUpadate { get; set; }
+    public DateTime LastUpadate { get; }
     public abstract void Adjust(LearningAction action);
 }
