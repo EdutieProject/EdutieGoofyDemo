@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Curriculum\LearningElements\Tasks\DynamicTasks\" />
+    <Folder Include="Entities\Curriculum\LearningElements\Tasks\StaticTasks\" />
+  </ItemGroup>
+
 </Project>

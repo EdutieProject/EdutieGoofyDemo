@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Common;
+﻿using Domain.Entities.Curriculum.LearningElements.Interfaces;
+using Domain.Entities.Profiles.ESP;
 using Domain.Entities.Users;
 using System.Security.Cryptography;
 
@@ -6,31 +7,38 @@ namespace Domain.Entities.Aggregates;
 
 public class LearningAction
 {
-    private StudentUser user;
-    public StudentUser User { get => user; }
 
-    private readonly LearningElement learningElement;
+    StudentUser user;
 
-    private int experience = 0;
-    public int Experience { get => experience; }
+    ILearningElement learningElement;
+    public ILearningElement LearningElement => learningElement;
 
+    Dictionary<Skill, int> skillExperience = new();
+    public Dictionary<Skill, int> SkillExperience => skillExperience;
+    public int TotalExperience => skillExperience.Sum(o => o.Value);
 
-    public LearningAction(StudentUser user, LearningElement learningElement)
+    public LearningAction(StudentUser studentUser, ILearningElement learningElem)
     {
-        this.user = user;
-        this.learningElement = learningElement;
-    }
+        user = studentUser;
+        learningElement = learningElem;
 
-    public LearningElement LearningElement { get => learningElement; }
+        foreach (var skill in learningElem.Skills) 
+        {
+            SkillExperience.Add(skill, 0);
+        }
+
+    }
 
     public void Simulate()
     {
-        experience = RandomNumberGenerator.GetInt32(200);
+
     }
 
     public void Finalize()
     {
-        User.Esp.Adjust(this);
-        User.Elp.Adjust(this);
+        user.Elp.Adjust(this);
+        user.Esp.Adjust(this);
+        user.Eip.Adjust(this);
     }
+
 }

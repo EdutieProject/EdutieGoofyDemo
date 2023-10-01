@@ -1,6 +1,7 @@
-﻿using Domain.Entities.Common;
+﻿using Domain.Entities.Profiles.EIP;
 using Domain.Entities.Profiles.ELP;
 using Domain.Entities.Profiles.ESP;
+using Domain.Entities.Users.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Domain.Entities.Users
     {
         public ElasticLearningProfile Elp { get; set; } = new();
         public ElasticSkillsProfile Esp { get; set; } = new();
+        public ElasticIntelligenceProfile Eip { get; set; } = new();
         public StudentUser(string username) : base(username) { }
 
     }

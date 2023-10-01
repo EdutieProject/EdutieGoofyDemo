@@ -8,7 +8,8 @@ namespace Domain.ValueObjects
 {
     public class Video
     {
-        public byte[] Data { get; set; }
-        public string Description { get; set; }
+        public int Id { get; set; }
+        public byte[] Data { get; set; } = Array.Empty<byte>();
+        public string Description { get; set; } = string.Empty;
     }
 }

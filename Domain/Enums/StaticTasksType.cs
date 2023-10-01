@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities.Profiles.ESP;
+namespace Domain.Enums;
 
-public record Skill(int Id, string Name);
+public enum StaticTasksType
+{
+    ProjectBased,
+    ExerciseBased,
+}

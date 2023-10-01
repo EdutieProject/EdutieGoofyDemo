@@ -1,5 +1,3 @@
-﻿using Domain.Entities.LearningElements;
-
-namespace Domain.Entities.Profiles.ESP;
+﻿namespace Domain.Entities.Profiles.ESP;
 
 public record SkillBlock(Skill Skill, int TotalExperience, DateTime CreatedOn);

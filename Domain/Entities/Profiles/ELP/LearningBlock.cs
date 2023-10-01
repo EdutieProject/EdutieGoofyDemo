@@ -1,5 +1,5 @@
-﻿using Domain.Entities.Common;
+﻿using Domain.Entities.Curriculum.LearningElements.Interfaces;
 
 namespace Domain.Entities.Profiles.ELP;
 
-public record LearningBlock(LearningElement LearningElement, int TotalExperience, DateTime CreatedOn);
+public record LearningBlock(ILearningElement LearningElement, int TotalExperience, DateTime CreatedOn);
