@@ -8,12 +8,12 @@ namespace Domain.Entities.Aggregates;
 public class LearningAction
 {
 
-    StudentUser user;
+    readonly StudentUser user;
 
-    ILearningElement learningElement;
+    readonly ILearningElement learningElement;
     public ILearningElement LearningElement => learningElement;
 
-    Dictionary<Skill, int> skillExperience = new();
+    readonly Dictionary<Skill, int> skillExperience = new();
     public Dictionary<Skill, int> SkillExperience => skillExperience;
     public int TotalExperience => skillExperience.Sum(o => o.Value);
 
@@ -29,9 +29,15 @@ public class LearningAction
 
     }
 
-    public void Simulate()
+    public void Simulate(int maxExperience)
     {
-
+        foreach (var skill in  skillExperience)
+        {
+            skillExperience[skill.Key] = RandomNumberGenerator.GetInt32(
+                (int)(maxExperience - .25 * maxExperience), 
+                (int)(maxExperience+ .25*maxExperience)
+                );
+        }
     }
 
     public void Finalize()

@@ -10,8 +10,8 @@ namespace Domain.Entities.Curriculum.SyllabusElements
     public class Lesson
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
 
         public Lesson? Prev { get; set; }
         public HashSet<Lesson>? Next { get; set; }

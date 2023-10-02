@@ -28,18 +28,21 @@ public class ElasticIntelligenceProfile : ILearningProfile
         LastUpadate = DateTime.Now;
     }
 
+    // We need a better formula for adjusting Eip
+    int CalculateIntelligencePoints(int gainedExperience)
+    {
+        var timeFromLastUpdate = DateTime.Now - LastUpadate;
+        return (int) Math.Cbrt((gainedExperience - 70) * timeFromLastUpdate.TotalMilliseconds / DateTime.Now.Ticks * 100000000000000);
+    }
+
     public void Adjust(LearningAction action)
     {
-        var exp = action.TotalExperience;
-        var timeFromLastUpdate = DateTime.Now - LastUpadate;
-
-        // We need a better formula for adjusting Eip
-        double modifyValue = Math.Cbrt((exp - 70) * timeFromLastUpdate.TotalMilliseconds / DateTime.Now.Ticks * 100000000000000);
+        int modifyValue = CalculateIntelligencePoints(action.TotalExperience);
 
         foreach (var learningTask in action.LearningElement.Tasks)
         {
-            IntelligencePoints[learningTask.PrimaryItelligence] += (int)modifyValue;
-            IntelligencePoints[learningTask.SecondaryIntelligence] += (int)modifyValue;
+            IntelligencePoints[learningTask.PrimaryItelligence] += modifyValue;
+            IntelligencePoints[learningTask.SecondaryIntelligence] += modifyValue;
         }
     }
 }

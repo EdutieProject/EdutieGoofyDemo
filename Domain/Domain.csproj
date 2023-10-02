@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Entities\Curriculum\Builders\" />
     <Folder Include="Entities\Curriculum\LearningElements\Tasks\DynamicTasks\" />
     <Folder Include="Entities\Curriculum\LearningElements\Tasks\StaticTasks\" />
   </ItemGroup>
