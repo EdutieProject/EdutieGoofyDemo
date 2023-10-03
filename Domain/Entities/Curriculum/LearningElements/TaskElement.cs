@@ -28,6 +28,10 @@ public class TaskElement : ILearningElement
     readonly HashSet<Skill> skills = new();
     public HashSet<Skill> Skills => skills;
 
+    public TaskElement(string name)
+    {
+        Name = name;
+    }
 
 
     public void AddSkill(Skill skill)

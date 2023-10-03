@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities.Aggregates;
@@ -17,13 +18,13 @@ public class ElasticIntelligenceProfile : ILearningProfile
     readonly Dictionary<IntelligenceType, int> intelligencePoints = new();
     public Dictionary<IntelligenceType, int> IntelligencePoints => intelligencePoints;
 
-    public DateTime LastUpadate { get; private set; }
+    public DateTime LastUpadate { get; private set; } = DateTime.Now;
 
     public ElasticIntelligenceProfile()
     {
-        foreach (IntelligenceType Itype in Enum.GetValues(typeof(IntelligenceType)))
+        foreach (IntelligenceType InType in Enum.GetValues(typeof(IntelligenceType)))
         {
-            intelligencePoints.Add(Itype, 0);
+            intelligencePoints.Add(InType, 0);
         }
         LastUpadate = DateTime.Now;
     }
@@ -32,8 +33,13 @@ public class ElasticIntelligenceProfile : ILearningProfile
     int CalculateIntelligencePoints(int gainedExperience)
     {
         var timeFromLastUpdate = DateTime.Now - LastUpadate;
-        return (int) Math.Cbrt((gainedExperience - 70) * timeFromLastUpdate.TotalMilliseconds / DateTime.Now.Ticks * 100000000000000);
+        int formula(int x) => (int)Math.Cbrt((x - 70) * timeFromLastUpdate.TotalMilliseconds / DateTime.Now.Ticks * 100000000000000);
+        var calculated = formula(gainedExperience);
+
+        return calculated != 0 ? calculated : gainedExperience / 10 - 6;
     }
+
+
 
     public void Adjust(LearningAction action)
     {
@@ -45,4 +51,8 @@ public class ElasticIntelligenceProfile : ILearningProfile
             IntelligencePoints[learningTask.SecondaryIntelligence] += modifyValue;
         }
     }
+
+    // Function for testing purposes
+    public void SetLastUpdate(DateTime time)
+        => LastUpadate = time;
 }

@@ -9,7 +9,7 @@ public class ElasticSkillsProfile : ILearningProfile
     private readonly HashSet<SkillBlock> skillBlocks = new();
     public HashSet<SkillBlock> SkillBlocks => skillBlocks;
 
-    public DateTime LastUpadate { get; private set; }
+    public DateTime LastUpadate { get; private set; } = DateTime.Now;
 
     public void Adjust(LearningAction learningAction)
     {

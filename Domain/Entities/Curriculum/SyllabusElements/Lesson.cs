@@ -11,7 +11,6 @@ namespace Domain.Entities.Curriculum.SyllabusElements
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
 
         public Lesson? Prev { get; set; }
         public HashSet<Lesson>? Next { get; set; }
@@ -19,11 +18,9 @@ namespace Domain.Entities.Curriculum.SyllabusElements
 
         public ILearningElement StartingElement { get; set; }
 
-        public Lesson(string name, string desc, ILearningElement start) 
+        public Lesson(string name)
         {
             Name = name;
-            Description = desc;
-            StartingElement = start;
         }
     }
 }

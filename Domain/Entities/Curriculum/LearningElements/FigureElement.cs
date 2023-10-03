@@ -26,6 +26,10 @@ public class FigureElement : ILearningElement
     readonly HashSet<ILearningTask> tasks = new();
     public HashSet<ILearningTask> Tasks => tasks;
 
+    public FigureElement(string name)
+    {
+        Name = name;
+    }
 
 
     public void AddSkill(Skill skill)

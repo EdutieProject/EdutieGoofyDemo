@@ -31,7 +31,7 @@ public class LearningAction
 
     public void Simulate(int maxExperience)
     {
-        foreach (var skill in  skillExperience)
+        foreach (var skill in skillExperience)
         {
             skillExperience[skill.Key] = RandomNumberGenerator.GetInt32(
                 (int)(maxExperience - .25 * maxExperience), 

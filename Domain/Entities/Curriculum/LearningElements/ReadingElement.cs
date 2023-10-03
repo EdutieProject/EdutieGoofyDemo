@@ -14,11 +14,11 @@ namespace Domain.Entities.Curriculum.LearningElements;
 public class ReadingElement : ILearningElement
 {
 
-    public string Name => throw new NotImplementedException();
+    public string Name { get; set; } = string.Empty;
 
-    public ILearningElement? Prev => throw new NotImplementedException();
+    public ILearningElement? Prev { get; set; }
 
-    public ILearningElement? Next => throw new NotImplementedException();
+    public ILearningElement? Next { get; set; }
 
 
     readonly HashSet<Skill> skills = new();
@@ -29,6 +29,10 @@ public class ReadingElement : ILearningElement
     public HashSet<ILearningTask> Tasks => tasks;
 
 
+    public ReadingElement(string name)
+    {
+        Name = name;
+    }
 
 
     public void AddSkill(Skill skill)

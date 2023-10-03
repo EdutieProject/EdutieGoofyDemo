@@ -27,6 +27,10 @@ public class MovieElement : ILearningElement
     readonly HashSet<ILearningTask> tasks = new();
     public HashSet<ILearningTask> Tasks => tasks;
 
+    public MovieElement(string name)
+    {
+        Name = name;
+    }
 
 
     public void AddSkill(Skill skill)

@@ -12,7 +12,8 @@ public class Course
     public string Name { get; set; }
     public Science Science { get; set; }
 
-    private HashSet<Lesson> startingLessons = new();
+    private readonly HashSet<Lesson> startingLessons = new();
+    public HashSet<Lesson> StartingLessons => startingLessons;
 
     public void AddStartingLesson(Lesson lesson)
     {

@@ -10,14 +10,12 @@ public class Science
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public string Description { get; set; }
     
     private readonly List<Course> courses = new();
 
-    public Science(string name, string desc)
+    public Science(string name)
     { 
         Name = name;
-        Description = desc;
     }
 
     public void AddNewCourse(Course course)
