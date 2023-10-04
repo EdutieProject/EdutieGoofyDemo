@@ -3,6 +3,7 @@ using Domain.Entities.Curriculum.LearningElements.Tasks;
 using Domain.Entities.Curriculum.LearningElements.Tasks.EmbeddedTasks;
 using Domain.Entities.Profiles.ESP;
 using Domain.Entities.Users;
+using Domain.Enums;
 using Domain.ValueObjects;
 using System;
 using System.Collections.Generic;

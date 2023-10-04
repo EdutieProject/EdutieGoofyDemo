@@ -15,8 +15,8 @@ public class EipTests
     static ILearningElement GetSampleReadingElem()
     {
         ReadingElement reading = new("Reading Element");
-        reading.AddSkill(new Skill(1, "Skill1"));
-        reading.AddSkill(new Skill(2, "Skill2"));
+        reading.AddSkill(Skill.Research);
+        reading.AddSkill(Skill.ReadingComprehension);
         ReadingTask readingTask = new()
         {
             PrimaryItelligence = IntelligenceType.Logical,
