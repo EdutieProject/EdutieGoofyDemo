@@ -1,4 +1,4 @@
-using Domain.Entities.Aggregates;
+using Domain.Entities.Curriculum;
 using Domain.Entities.Curriculum.LearningElements;
 using Domain.Entities.Curriculum.LearningElements.Interfaces;
 using Domain.Entities.Curriculum.LearningElements.Tasks.EmbeddedTasks;
@@ -7,7 +7,7 @@ using Domain.Entities.Profiles.ESP;
 using Domain.Entities.Users;
 using Domain.Enums;
 
-namespace Tests;
+namespace Tests.LearningProfileTests;
 
 public class EipTests
 {
@@ -46,11 +46,10 @@ public class EipTests
     public void OneStudentEipTest()
     {
         var reading = GetSampleReadingElem();
-        StudentUser student = new("Student1");
+        var learningResult = new LearningResult(120, reading);
 
-        var learningAction = new LearningAction(student, reading);
-        learningAction.Simulate(150);
-        learningAction.Finalize();
+        StudentUser student = new("Student1");
+        student.Eip.Adjust(learningResult);
 
         Assert.That(
             student.Eip.IntelligencePoints[IntelligenceType.Kinesthetic], Is.GreaterThan(0)
@@ -66,14 +65,11 @@ public class EipTests
         StudentUser student1 = new("Student1");
         StudentUser student2 = new("Student2");
 
-        LearningAction learningAction1 = new(student1, reading);
-        LearningAction learningAction2 = new(student2, reading);
+        var learningResult1 = new LearningResult(125, reading);
+        var learningResult2 = new LearningResult(60, reading);
 
-        learningAction1.Simulate(120); learningAction1.Finalize();
-        learningAction2.Simulate(90); learningAction2.Finalize();
-
-        Console.WriteLine(learningAction1.TotalExperience);
-        Console.WriteLine(learningAction2.TotalExperience);
+        student1.Eip.Adjust(learningResult1);
+        student2.Eip.Adjust(learningResult2);
 
         Assert.That(
             student1.Eip.IntelligencePoints[IntelligenceType.Logical], Is.GreaterThan(student2.Eip.IntelligencePoints[IntelligenceType.Logical]
@@ -86,23 +82,18 @@ public class EipTests
     {
         var reading = GetSampleReadingElem();
 
+        var learningResult = new LearningResult(100, reading);
+
         StudentUser student1 = new("Student1");
         StudentUser student2 = new("Student2");
         student1.Eip.SetLastUpdate(DateTime.Now - TimeSpan.FromHours(1));
         student2.Eip.SetLastUpdate(DateTime.Now - TimeSpan.FromHours(10));
 
-        LearningAction learningAction1 = new(student1, reading);
-        LearningAction learningAction2 = new(student2, reading);
-
-        
-        learningAction1.Simulate(120); learningAction1.Finalize();
-        learningAction2.Simulate(120); learningAction2.Finalize();
-
-        Console.WriteLine(learningAction1.TotalExperience);
-        Console.WriteLine(learningAction2.TotalExperience);
+        student1.Eip.Adjust(learningResult);
+        student2.Eip.Adjust(learningResult);
 
         Assert.That(
-            student2.Eip.IntelligencePoints[IntelligenceType.Logical], 
+            student2.Eip.IntelligencePoints[IntelligenceType.Logical],
             Is.GreaterThan(student1.Eip.IntelligencePoints[IntelligenceType.Logical])
         );
     }
