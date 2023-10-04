@@ -1,4 +1,4 @@
-﻿using Domain.Entities.Aggregates;
+﻿using Domain.Entities.Curriculum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +10,5 @@ namespace Domain.Entities.Profiles.Interfaces;
 public interface ILearningProfile
 {
     public DateTime LastUpadate { get; }
-    public abstract void Adjust(LearningAction action);
+    public abstract void Adjust(LearningResult result);
 }

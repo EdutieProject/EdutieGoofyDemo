@@ -47,8 +47,4 @@ public class MovieElement : ILearningElement
         => tasks.Add(task);
 
 
-    public void AssessUserPerformance(StudentUser user)
-    {
-        throw new NotImplementedException();
-    }
 }

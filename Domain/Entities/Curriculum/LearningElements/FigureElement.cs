@@ -45,9 +45,4 @@ public class FigureElement : ILearningElement
     public void RemoveTask(ILearningTask task)
         => tasks.Remove(task);
 
-
-    public void AssessUserPerformance(StudentUser user)
-    {
-        throw new NotImplementedException();
-    }
 }

@@ -1,4 +1,4 @@
-﻿using Domain.Entities.Aggregates;
+﻿using Domain.Entities.Curriculum;
 using Domain.Entities.Profiles.Interfaces;
 
 namespace Domain.Entities.Profiles.ESP;
@@ -11,9 +11,9 @@ public class ElasticSkillsProfile : ILearningProfile
 
     public DateTime LastUpadate { get; private set; } = DateTime.Now;
 
-    public void Adjust(LearningAction learningAction)
+    public void Adjust(LearningResult result)
     {
-        foreach (var skillExpPair in learningAction.SkillExperience)
+        foreach (var skillExpPair in result.SkillExperience)
         {
             var sBlock = new SkillBlock(skillExpPair.Key, skillExpPair.Value, DateTime.Now);
             skillBlocks.Add(sBlock);

@@ -1,4 +1,4 @@
-﻿using Domain.Entities.Aggregates;
+﻿using Domain.Entities.Curriculum;
 using Domain.Entities.Profiles.Interfaces;
 using Domain.Enums;
 using Domain.ValueObjects;
@@ -20,9 +20,9 @@ namespace Domain.Entities.Profiles.ELP
 
         public ElasticLearningProfile() { }
 
-        public void Adjust(LearningAction action)
+        public void Adjust(LearningResult result)
         {
-            var block = new LearningBlock(action.LearningElement, action.TotalExperience, DateTime.Now);
+            var block = new LearningBlock(result.LearningElement, result.TotalExperience, DateTime.Now);
             learningBlocks.Add(block);
         }
 

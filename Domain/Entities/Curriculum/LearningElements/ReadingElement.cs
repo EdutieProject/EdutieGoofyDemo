@@ -51,8 +51,4 @@ public class ReadingElement : ILearningElement
     public void RemoveTask(ILearningTask task)
         => tasks.Add(task);
 
-    public void AssessUserPerformance(StudentUser user)
-    {
-        throw new NotImplementedException();
-    }
 }

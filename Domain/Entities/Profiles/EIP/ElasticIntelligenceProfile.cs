@@ -5,7 +5,7 @@ using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Entities.Aggregates;
+using Domain.Entities.Curriculum;
 using Domain.Entities.Profiles.Interfaces;
 using Domain.Enums;
 using Domain.ValueObjects;
@@ -41,11 +41,11 @@ public class ElasticIntelligenceProfile : ILearningProfile
 
 
 
-    public void Adjust(LearningAction action)
+    public void Adjust(LearningResult result)
     {
-        int modifyValue = CalculateIntelligencePoints(action.TotalExperience);
+        int modifyValue = CalculateIntelligencePoints(result.TotalExperience);
 
-        foreach (var learningTask in action.LearningElement.Tasks)
+        foreach (var learningTask in result.LearningElement.Tasks)
         {
             IntelligencePoints[learningTask.PrimaryItelligence] += modifyValue;
             IntelligencePoints[learningTask.SecondaryIntelligence] += modifyValue;
