@@ -1,5 +1,4 @@
-﻿using Domain.Entities.Aggregates;
-using Domain.Entities.Curriculum.LearningElements.Interfaces;
+﻿using Domain.Entities.Curriculum.LearningElements.Interfaces;
 using Domain.Entities.Profiles.EIP;
 using Domain.Enums;
 using System;

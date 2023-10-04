@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Entities.Curriculum;
+﻿using Domain.Entities.Curriculum;
 using Domain.Entities.Profiles.Interfaces;
 using Domain.Enums;
-using Domain.ValueObjects;
 
 namespace Domain.Entities.Profiles.EIP;
 

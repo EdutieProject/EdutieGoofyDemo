@@ -1,5 +1,4 @@
-﻿using Domain.Entities.Aggregates;
-using Domain.Entities.Users;
+﻿using Domain.Entities.Users;
 
 namespace Example;
 
