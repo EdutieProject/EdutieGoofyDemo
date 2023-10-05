@@ -7,8 +7,8 @@ namespace Domain.Entities.Curriculum.LearningElements.Interfaces;
 public interface ILearningElement
 {
     public string Name { get; }
-    public ILearningElement? Prev { get; }
-    public ILearningElement? Next { get; }
+    public ILearningElement? Prev { get; set; }
+    public ILearningElement? Next { get; set; }
 
     public HashSet<Skill> Skills { get; }
 
