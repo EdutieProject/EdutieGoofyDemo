@@ -20,21 +20,16 @@ public abstract class LearningElementBase : ILearningElement
         set
         {
             if (value == null) return;
-            value.Next = this;
+            value.Next.Add(this);
             prev = value;
         }
     }
 
-    ILearningElement? next;
-    public ILearningElement? Next
+    HashSet<ILearningElement> next = new();
+    public HashSet<ILearningElement> Next
     {
         get => next;
-        set
-        {
-            if (value == null) return;
-            value.Prev = this;
-            next = value;
-        }
+        set => next = value;
     }
 
     protected HashSet<Skill> skills = new();

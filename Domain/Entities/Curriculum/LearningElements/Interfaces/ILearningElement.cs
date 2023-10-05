@@ -8,7 +8,7 @@ public interface ILearningElement
 {
     public string Name { get; }
     public ILearningElement? Prev { get; set; }
-    public ILearningElement? Next { get; set; }
+    public HashSet<ILearningElement> Next { get; set; }
 
     public HashSet<Skill> Skills { get; }
 
