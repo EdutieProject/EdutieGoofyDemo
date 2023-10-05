@@ -1,5 +1,6 @@
 ﻿using Domain.Entities.Curriculum;
 using Domain.Entities.Profiles.Interfaces;
+using Domain.Enums;
 
 namespace Domain.Entities.Profiles.ESP;
 
@@ -19,6 +20,12 @@ public class ElasticSkillsProfile : ILearningProfile
             skillBlocks.Add(sBlock);
         }
         LastUpadate = DateTime.Now;
+    }
+
+    public int GetTotalExperienceOf(Skill skill)
+    {
+        var totalExperience = skillBlocks.Where(o=>o.Skill==skill).Sum(o=>o.TotalExperience);
+        return totalExperience;
     }
 
 }

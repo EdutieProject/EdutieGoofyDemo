@@ -9,8 +9,8 @@ namespace Domain.Entities.Curriculum.SyllabusElements;
 public class Course
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public Science Science { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public Science? Science { get; set; }
 
     private readonly HashSet<Lesson> startingLessons = new();
     public HashSet<Lesson> StartingLessons => startingLessons;

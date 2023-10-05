@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Curriculum.LearningElements.Tasks.EmbeddedTasks;
 
-public class VideoTask : ILearningTask
+public class MovieTask : ILearningTask
 {
     public string Question { get; set; } = string.Empty;
     public string ExpectedAnswer { get; set; } = string.Empty;

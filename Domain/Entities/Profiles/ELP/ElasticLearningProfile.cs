@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Curriculum;
+using Domain.Entities.Curriculum.LearningElements.Interfaces;
 using Domain.Entities.Profiles.Interfaces;
 using Domain.Enums;
 using Domain.ValueObjects;
@@ -24,6 +25,12 @@ namespace Domain.Entities.Profiles.ELP
         {
             var block = new LearningBlock(result.LearningElement, result.TotalExperience, DateTime.Now);
             learningBlocks.Add(block);
+        }
+
+        public int GetTotalExperienceOf(ILearningElement learningElem)
+        {
+            int totalExperience = learningBlocks.Where(o => o.LearningElement == learningElem).Sum(o => o.TotalExperience);
+            return totalExperience;
         }
 
     }

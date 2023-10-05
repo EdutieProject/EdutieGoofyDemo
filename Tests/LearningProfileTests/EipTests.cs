@@ -1,30 +1,13 @@
 using Domain.Entities.Curriculum;
-using Domain.Entities.Curriculum.LearningElements;
-using Domain.Entities.Curriculum.LearningElements.Interfaces;
-using Domain.Entities.Curriculum.LearningElements.Tasks.EmbeddedTasks;
-using Domain.Entities.Profiles.EIP;
-using Domain.Entities.Profiles.ESP;
 using Domain.Entities.Users;
 using Domain.Enums;
+using Tests.Mocks;
 
 namespace Tests.LearningProfileTests;
 
 public class EipTests
 {
 
-    static ILearningElement GetSampleReadingElem()
-    {
-        ReadingElement reading = new("Reading Element");
-        reading.AddSkill(Skill.Research);
-        reading.AddSkill(Skill.ReadingComprehension);
-        ReadingTask readingTask = new()
-        {
-            PrimaryItelligence = IntelligenceType.Logical,
-            SecondaryIntelligence = IntelligenceType.Kinesthetic
-        };
-        reading.AddTask(readingTask);
-        return reading;
-    }
 
     [SetUp]
     public void Setup()
@@ -45,7 +28,7 @@ public class EipTests
     [Test]
     public void OneStudentEipTest()
     {
-        var reading = GetSampleReadingElem();
+        var reading = LearningElementMocks.GetSampleReadingElem();
         var learningResult = new LearningResult(120, reading);
 
         StudentUser student = new("Student1");
@@ -60,7 +43,7 @@ public class EipTests
     [Test]
     public void TwoStudentsComparisonTest()
     {
-        var reading = GetSampleReadingElem();
+        var reading = LearningElementMocks.GetSampleReadingElem();
 
         StudentUser student1 = new("Student1");
         StudentUser student2 = new("Student2");
@@ -80,7 +63,7 @@ public class EipTests
     [Test]
     public void TwoStudentsTimeDifferenceTest()
     {
-        var reading = GetSampleReadingElem();
+        var reading = LearningElementMocks.GetSampleReadingElem();
 
         var learningResult = new LearningResult(100, reading);
 
