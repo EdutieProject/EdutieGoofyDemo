@@ -13,6 +13,10 @@ namespace Tests.Mocks;
 
 public static class LearningElementMocks
 {
+    /// <summary>
+    /// Sample Reading elem with research, readingComprehension and visualization skills and one tasks with logical primaryIntelligence and Kinesthetic Secondary intelligence
+    /// </summary>
+    /// <returns>Reading Learning element</returns>
     public static ILearningElement GetSampleReadingElem()
     {
         ReadingElement reading = new("Reading Element");
@@ -28,7 +32,10 @@ public static class LearningElementMocks
         return reading;
     }
 
-
+    /// <summary>
+    /// Sample movie elem with research and information synthesis skills and 2 tasks with visual and kinesthethic primary intelligences and liguistic and interpersonal secondary intelligences
+    /// </summary>
+    /// <returns>Movie Learning Element</returns>
     public static ILearningElement GetSampleMovieElem()
     {
         MovieElement movie = new("Movie about the history of Poland");
@@ -51,6 +58,11 @@ public static class LearningElementMocks
         return movie;
     }
 
+
+    /// <summary>
+    /// Learning element tree constructed without builders using entities and their methods. For testing purposes.
+    /// </summary>
+    /// <returns>Learning element tree</returns>
     public static ILearningElement GetSampleLearningTree()
     {
         MovieElement movieElem = new("Introductory movie");

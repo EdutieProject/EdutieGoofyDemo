@@ -34,7 +34,7 @@ public class LessonBuilderTest
     }
 
     [Test]
-    public void LessonBuilderTreeTest()
+    public void LessonBuilderTreeInjectionTest()
     {
         var builder = new LessonBuilder("Example lesson");
         var head = LearningElementMocks.GetSampleLearningTree();
