@@ -17,6 +17,13 @@ public class LearningElementBuilder
     public LearningElementBuilder()
     { }
 
+    /// <summary>
+    /// Constructor which is meant to modify existing element
+    /// </summary>
+    /// <param name="element">element to modify</param>
+    public LearningElementBuilder(ILearningElement element)
+        => learningElement = element;
+
 
     /// <summary>
     /// Sets the created element to be a new Reading Element
@@ -71,6 +78,7 @@ public class LearningElementBuilder
         if (learningElement != null)
         {
             learningElement.Prev = previous;
+            previous.Next.Add(learningElement);
         }
         return this;
     }
@@ -86,7 +94,12 @@ public class LearningElementBuilder
         return this;
     }
 
-    public ILearningElement? Build()
-        => learningElement;
+    /// <summary>
+    /// Builds previously specified element. If element is not specified, throws an exception.
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException">Exception thrown when CreateConcreteElement has not been called</exception>
+    public ILearningElement Build()
+        => learningElement ?? throw new NullReferenceException("Builder misuse");
 
 }
