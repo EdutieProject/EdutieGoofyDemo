@@ -7,11 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities.Curriculum.LearningElements.Tasks.StaticTasks
+namespace Domain.Entities.Curriculum.LearningElements.Tasks.StaticTasks;
+
+public class ProjectBasedTask : ILearningTask
 {
-    internal class ProjectBasedTask : ILearningTask
-    {
-        public IntelligenceType PrimaryItelligence { get; set; }
-        public IntelligenceType SecondaryIntelligence { get; set; }
-    }
+    public IntelligenceType PrimaryItelligence { get; set; }
+    public IntelligenceType SecondaryIntelligence { get; set; }
 }

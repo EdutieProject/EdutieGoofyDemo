@@ -16,7 +16,7 @@ public class Lesson
     public string Name { get; set; } = string.Empty;
 
     public Lesson? Prev { get; set; }
-    public HashSet<Lesson>? Next { get; set; }
+    public HashSet<Lesson> Next { get; set; } = new();
 
 
     public ILearningElement StartingElement { get; set; }

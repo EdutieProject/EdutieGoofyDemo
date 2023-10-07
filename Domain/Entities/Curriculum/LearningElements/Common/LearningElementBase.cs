@@ -24,7 +24,6 @@ public abstract class LearningElementBase : ILearningElement
         set
         {
             if (value == null) return;
-            value.Next.Add(this);
             prev = value;
         }
     }
