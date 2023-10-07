@@ -4,7 +4,9 @@ using Domain.Enums;
 
 namespace Domain.Entities.Profiles.EIP;
 
-// EIP: A profile designed to track user's intelligence parameters
+/// <summary>
+/// Profile designed to track specific Intelligences of the user
+/// </summary>
 public class ElasticIntelligenceProfile : ILearningProfile
 {
     readonly Dictionary<IntelligenceType, int> intelligencePoints = new();

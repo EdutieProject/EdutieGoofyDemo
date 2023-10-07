@@ -4,6 +4,11 @@ using System.Security.Cryptography;
 
 namespace Domain.Entities.Curriculum;
 
+/// <summary>
+/// Record which purpose is to represent what has been achieved in learning activity.
+/// </summary>
+/// <param name="LearningElement">learning element in the activity</param>
+/// <param name="SkillExperience">skill experience pairs gained in this activity</param>
 public record LearningResult(
     ILearningElement LearningElement,
     Dictionary<Skill, int> SkillExperience

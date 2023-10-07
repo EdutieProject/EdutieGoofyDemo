@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="NavigationEngine\" />
     <Folder Include="GenerationEngine\" />
+    <Folder Include="NavigationEngine\" />
   </ItemGroup>
 
 </Project>

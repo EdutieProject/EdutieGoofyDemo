@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Curriculum.SyllabusElements;
 
+/// <summary>
+/// A collection of courses related with particular science.
+/// </summary>
 public class Science
 {
     public int Id { get; set; }

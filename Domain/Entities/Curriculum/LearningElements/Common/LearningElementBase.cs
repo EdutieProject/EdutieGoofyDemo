@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Curriculum.LearningElements.Common;
 
+
+/// <summary>
+/// Base learning element commonly used when constructing a concrete learning elem
+/// </summary>
 public abstract class LearningElementBase : ILearningElement
 {
     public string Name { get; set; } = string.Empty;

@@ -5,22 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities.Curriculum.SyllabusElements
+namespace Domain.Entities.Curriculum.SyllabusElements;
+
+/// <summary>
+/// A tree of learning elements
+/// </summary>
+public class Lesson
 {
-    public class Lesson
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+
+    public Lesson? Prev { get; set; }
+    public HashSet<Lesson>? Next { get; set; }
+
+
+    public ILearningElement StartingElement { get; set; }
+
+    public Lesson(string name)
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-
-        public Lesson? Prev { get; set; }
-        public HashSet<Lesson>? Next { get; set; }
-
-
-        public ILearningElement StartingElement { get; set; }
-
-        public Lesson(string name)
-        {
-            Name = name;
-        }
+        Name = name;
     }
 }
