@@ -58,6 +58,37 @@ public static class LearningElementMocks
         return movie;
     }
 
+    public static ILearningElement GetSampleTaskElem()
+    {
+        TaskElement taskElem = new("Fun task");
+        taskElem.AddSkill(Skill.Adaptability);
+        taskElem.AddSkill(Skill.AnalitycalThinking);
+        taskElem.AddTask(
+            new ProjectBasedTask()
+            {
+                PrimaryItelligence = IntelligenceType.Naturalistic,
+                SecondaryIntelligence = IntelligenceType.Logical
+            }
+        );
+        return taskElem;
+    }
+
+    public static ILearningElement GetSampleFigureElem()
+    {
+        FigureElement figureElem = new("Interesting plot");
+        figureElem.AddSkill(Skill.InformationSynthesis);
+        figureElem.AddSkill(Skill.Visualization);
+        figureElem.AddSkill(Skill.GoalSetting);
+        figureElem.AddTask(
+            new FigureTask()
+            {
+                PrimaryItelligence = IntelligenceType.Kinesthetic,
+                SecondaryIntelligence = IntelligenceType.Logical
+            }
+        );
+        return figureElem;
+    }
+
 
     /// <summary>
     /// Learning element tree constructed without builders using entities and their methods. For testing purposes.
@@ -82,27 +113,8 @@ public static class LearningElementMocks
                 SecondaryIntelligence = IntelligenceType.Naturalistic
             }
         );
-        TaskElement taskElem = new("Fun task");
-        taskElem.AddSkill(Skill.Adaptability);
-        taskElem.AddSkill(Skill.AnalitycalThinking);
-        taskElem.AddTask(
-            new ProjectBasedTask()
-            {
-                PrimaryItelligence = IntelligenceType.Naturalistic,
-                SecondaryIntelligence = IntelligenceType.Logical
-            }
-        );
-        FigureElement figureElem = new("Interesting plot");
-        figureElem.AddSkill(Skill.InformationSynthesis);
-        figureElem.AddSkill(Skill.Visualization);
-        figureElem.AddSkill(Skill.GoalSetting);
-        figureElem.AddTask(
-            new FigureTask()
-            {
-                PrimaryItelligence = IntelligenceType.Kinesthetic,
-                SecondaryIntelligence = IntelligenceType.Logical
-            }
-        );
+        var taskElem = GetSampleTaskElem();
+        var figureElem = GetSampleFigureElem();
         
         // add task elem
         taskElem.Prev = movieElem; 
