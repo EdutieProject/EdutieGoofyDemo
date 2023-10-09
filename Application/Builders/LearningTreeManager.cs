@@ -8,14 +8,58 @@ using System.Threading.Tasks;
 
 namespace Application.Builders;
 
-public class LearningTreeBuilder
+public class LearningTreeManager
 {
     readonly ILearningElement head;
-    public LearningTreeBuilder(ILearningElement learningElement)
+    public ILearningElement? Current { get; set; }
+    public LearningTreeManager(ILearningElement learningElement)
         => head = learningElement;
 
+    void GetMaximumStageRecursive(ref int stage, ILearningElement elem)
+    {
+        bool stageAdded = false;
+        foreach (var nextElem in elem.Next)
+        {
+            if (!stageAdded) stage += 1;
+            GetMaximumStageRecursive(ref stage, nextElem);
+            stageAdded = true;
+        }
+    }
 
-    
+    /// <summary>
+    /// Returns max number of hops that one can make exploring this learning tree from head to end;
+    /// </summary>
+    /// <returns></returns>
+    public int GetMaxStage()
+    {
+        int maxStage = 0;
+        GetMaximumStageRecursive(ref maxStage, head);
+        return maxStage;
+    }
+
+
+    /// <summary>
+    /// Appends a given element to a given previous element in a tree
+    /// </summary>
+    /// <param name="element">Element to append</param>
+    /// <param name="previousElem">Element to be set as previous</param>
+    public void AppendElement(ILearningElement element, ILearningElement previousElem)
+    {
+        previousElem.Next.Add(element);
+        element.Prev = previousElem;
+    }
+
+    /// <summary>
+    /// Function which appends an element to the element set as Current of the manager. If no Current has been specified, does nothing
+    /// </summary>
+    /// <param name="element">Element to append</param>
+    public void AppendElement(ILearningElement element)
+    {
+        if (Current is null) return;
+        Current.Next.Add(element);
+        element.Prev = Current;
+    }
+
     void FindLastElementsRecursive(ILearningElement elem, ref List<ILearningElement> lastElements)
     {
         if (elem.Next.Count == 0) lastElements.Add(elem);
@@ -49,10 +93,7 @@ public class LearningTreeBuilder
             learningElement.Next.ToList().ForEach(newElements.Add);
         }
         elements = newElements;
-        foreach (var learningElement in newElements)
-        {
-            FindElementsFromStageRecursive(stageToGet, ref elements, currentLevel + 1);
-        }
+        FindElementsFromStageRecursive(stageToGet, ref elements, currentLevel + 1);
     }
 
     /// <summary>
@@ -62,8 +103,29 @@ public class LearningTreeBuilder
     /// <returns>List of elements of given stage</returns>
     public List<ILearningElement> GetElementsFromStage(int stage)
     {
-        List<ILearningElement> elements = new();
+        List<ILearningElement> elements = new() { head };
         FindElementsFromStageRecursive(stage, ref elements);
+        return elements;
+    }
+
+
+    void RetrieveAllElementsRecursive(ILearningElement current, ref List<ILearningElement> allElements)
+    {
+        allElements.Add(current);
+        if (current.Next.Count == 0) return;
+
+        foreach (var learningElement in current.Next)
+            RetrieveAllElementsRecursive(learningElement, ref allElements);
+    }
+
+    /// <summary>
+    /// Gets all elements that are present in a learning tree
+    /// </summary>
+    /// <returns>The list of all learning elements</returns>
+    public List<ILearningElement> GetAllLearningElements()
+    {
+        var elements = new List<ILearningElement>();
+        RetrieveAllElementsRecursive(head, ref elements); 
         return elements;
     }
 }
