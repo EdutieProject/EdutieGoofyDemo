@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Entities.Curriculum.SyllabusElements;
+﻿namespace Domain.Entities.Curriculum.SyllabusElements;
 
 /// <summary>
-/// A tree of lessons
+/// A tree of lessons (with multiple heads)
 /// </summary>
 public class Course
 {
@@ -15,10 +9,11 @@ public class Course
     public string Name { get; set; } = string.Empty;
     public Science? Science { get; set; }
     
+    private readonly HashSet<Lesson> startingLessons = new();
+
     /// <summary>
     /// Courses may have multiple starting points (lessons) - this is a hashset of those.
     /// </summary>
-    private readonly HashSet<Lesson> startingLessons = new();
     public HashSet<Lesson> StartingLessons => startingLessons;
 
     public void AddStartingLesson(Lesson lesson)

@@ -1,4 +1,5 @@
 ﻿using Application.Builders;
+using Domain.Entities.Curriculum.LearningElements;
 using Domain.Entities.Curriculum.LearningElements.Interfaces;
 using Tests.Mocks;
 
@@ -65,7 +66,21 @@ public class LearningTreeManagerTests
 
         Assert.That(length, Is.EqualTo(2));
     }
-    
+
+    [Test]
+    public void GetAllElemsTest()
+    {
+        var elem1 = new ReadingElement("reading1");
+        var elem2 = new FigureElement("figure1");
+        var elem3 = new ReadingElement("reading2");
+        elem1.Next.Add(elem2);
+        elem2.Next.Add(elem3);
+
+        var actual = new LearningTreeManager(elem1).GetAllLearningElements();
+        var expected = new List<ILearningElement>() { elem1, elem2, elem3 };
+
+        Assert.That(actual, Is.EquivalentTo(expected));
+    }
 
 
     [Test]
