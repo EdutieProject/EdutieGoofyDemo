@@ -46,7 +46,10 @@ public class ElasticIntelligenceProfile : ILearningProfile
         }
     }
 
-    // Function for testing purposes
+    /// <summary>
+    /// Function only for testing purposes
+    /// </summary>
+    /// <param name="time">time to be set</param>
     public void SetLastUpdate(DateTime time)
         => LastUpadate = time;
 }

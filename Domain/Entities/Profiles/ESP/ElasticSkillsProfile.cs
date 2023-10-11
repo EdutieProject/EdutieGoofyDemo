@@ -28,4 +28,14 @@ public class ElasticSkillsProfile : ILearningProfile
         return totalExperience;
     }
 
+    public Dictionary<Skill, int> GetSkillExperiencePairs()
+    {
+        Dictionary<Skill, int> skillExperiencePairs = new();
+        foreach (Skill skill in Enum.GetValues(typeof(Skill)))
+        {
+            skillExperiencePairs[skill] = GetTotalExperienceOf(skill);
+        }
+        return skillExperiencePairs;
+    }
+
 }
