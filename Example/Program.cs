@@ -1,4 +1,6 @@
 ﻿using Application.Builders;
+using Application.LearningActivity;
+using Application.NavigationEngine;
 using Domain.Entities.Curriculum.SyllabusElements;
 using Domain.Entities.Users;
 using Domain.Enums;
@@ -8,7 +10,11 @@ namespace Example;
 
 internal class Program
 {
-    Course BuildCourseExample()
+    /// <summary>
+    /// Builds an example course for showcase purposes using builders
+    /// </summary>
+    /// <returns>Built course</returns>
+    static Course BuildCourseExample()
     {
         LearningElementBuilder learningElemBuilder = new();
         var elem1 = learningElemBuilder
@@ -87,7 +93,33 @@ internal class Program
 
     static void Main(string[] args)
     {
-        
-        Console.WriteLine("Hello World!");
+        Course course = BuildCourseExample();
+
+        // Get one and only lesson in the course
+        Lesson lesson = course.StartingLessons.First();
+
+        StudentUser user = new("Sukerberk Pierwszy");
+
+        LessonNavigationEngine lne = new(user);
+        var learningElem1 = lne.GetBestLearningElem(lesson);
+
+        // Student performs learning activity
+        LearningActivity activity1 = new(user, learningElem1);
+        /* 100 - example performance measure for dummy simulate function*/
+        activity1.Simulate(100);
+        activity1.Finalize();
+
+        Console.WriteLine("First display");
+        user.DisplayLearningProfiles();
+
+        var learningElem2 = lne.GetBestLearningElem(lesson);
+        LearningActivity activity2 = new(user, learningElem2);
+        activity2.Simulate(100);
+        activity2.Finalize();
+
+        Console.WriteLine("Second display");
+        user.DisplayLearningProfiles();
+
+        Console.ReadLine();
     }
 }

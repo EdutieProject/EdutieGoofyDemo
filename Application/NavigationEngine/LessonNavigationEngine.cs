@@ -33,7 +33,7 @@ public class LessonNavigationEngine
         {
             possibleLearningElems.AddRange(element.Next);
         }
-        return possibleLearningElems;
+        return possibleLearningElems.Count > 0 ? possibleLearningElems : new List<ILearningElement>() { lesson.StartingElement };
     }
 
     // NOT TESTED!!!!
@@ -59,5 +59,11 @@ public class LessonNavigationEngine
         return difficulty;
     }
 
+    public ILearningElement GetBestLearningElem(Lesson lesson)
+    {
+        var possibleElems = GetPossibleLearningElements(lesson);
+
+        return possibleElems.OrderByDescending(GetDifficultyFactorForElem).First();
+    }
 
 }
