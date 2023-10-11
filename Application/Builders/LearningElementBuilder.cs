@@ -1,5 +1,7 @@
 ﻿using Domain.Entities.Curriculum.LearningElements;
 using Domain.Entities.Curriculum.LearningElements.Interfaces;
+using Domain.Entities.Curriculum.LearningElements.Tasks.StaticTasks;
+using Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,7 +88,7 @@ public class LearningElementBuilder
     /// Sets next element to the provided element
     /// </summary>
     /// <param name="nextElem">Element to be set as next</param>
-    /// <returns></returns>
+    /// <returns>This builder</returns>
     public LearningElementBuilder AppendElement(ILearningElement nextElem)
     {
         learningElement?.Next.Add(nextElem);
@@ -95,9 +97,38 @@ public class LearningElementBuilder
     }
 
     /// <summary>
+    /// Adds task of given intelligences
+    /// </summary>
+    /// <param name="intelligences">intelligences of a task</param>
+    /// <returns>This builder</returns>
+    public LearningElementBuilder AddTask(IntelligenceType primary, IntelligenceType secondary)
+    {
+        learningElement?.AddTask(new ProjectBasedTask()
+        {
+            PrimaryItelligence = primary,
+            SecondaryIntelligence = secondary,
+        });
+        return this;
+    }
+
+    /// <summary>
+    /// Adds specific skills to a learning Element
+    /// </summary>
+    /// <param name="skills">skills to be added</param>
+    /// <returns>This builder</returns>
+    public LearningElementBuilder AddSkills(Skill[] skills)
+    {
+        foreach (var skill in skills)
+        {
+            learningElement?.AddSkill(skill);
+        }
+        return this;
+    }
+
+    /// <summary>
     /// Builds previously specified element. If element is not specified, throws an exception.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>This builder</returns>
     /// <exception cref="NullReferenceException">Exception thrown when CreateConcreteElement has not been called</exception>
     public ILearningElement Build()
         => learningElement ?? throw new NullReferenceException("Builder misuse");

@@ -15,6 +15,12 @@ public class LearningTreeManager
     public LearningTreeManager(ILearningElement learningElement)
         => head = learningElement;
 
+    
+    /// <summary>
+    /// Retrieves the head of a learning tree
+    /// </summary>
+    public ILearningElement Head => head;
+
     void GetMaximumStageRecursive(ref int stage, ILearningElement elem)
     {
         bool stageAdded = false;
